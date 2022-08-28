@@ -1,27 +1,4 @@
-doctype html
-html 
-    head 
-        title Mark
-        style.
-            body { 
-                font-family: Arial
-            }
-            #divLoaded {
-                display: none;
-            }
-        script.
-            const onSuccess = data => {     
-                document.querySelector("#title").innerText = data.title;
-                document.querySelector("#divNotLoaded").style.display = "none";
-                document.querySelector("#divLoaded").style.display = "block";
-            };
+extends ../partials/layout.pug
 
-            fetch("/api/index")
-                .then(response => response.json())
-                .then(json => onSuccess(json));
-    body 
-        h1 App
-        div#divNotLoaded
-            p Loading...
-        div#divLoaded 
-            h5#title
+block main 
+    h2 #{pageTitle}

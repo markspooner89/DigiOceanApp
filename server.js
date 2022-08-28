@@ -10,12 +10,8 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 app.get("/", (_, res) => {
-    res.render("index");
-});
-
-app.get("/api/index", (_, res) => { 
-    res.send({
-        title: "Welcome!"
+    res.render("index", {
+        pageTitle: "Welcome!"
     });
 });
 
