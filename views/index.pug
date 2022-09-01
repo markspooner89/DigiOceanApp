@@ -1,4 +1,13 @@
 extends ../partials/layout.pug
 
 block main 
-    h2 #{pageTitle}
+    h2 Pokemon
+    ul 
+        each val in pokemon
+            li= val.name
+    if showPreviousButton
+        div
+            a(href=`/?offset=${previousIndex}`) Previous
+    if showNextButton
+    div
+        a(href=`/?offset=${nextIndex}`) Next
