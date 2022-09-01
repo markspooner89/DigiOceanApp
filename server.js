@@ -11,23 +11,25 @@ app.set('views', path.join(__dirname, 'views'));
 
 const axios = require("axios");
 
-const getPokemon = async offset => {
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${1}`);
-    return response.data.results;
+const getPokemon = async number => {
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-form/${number}/`);
+    return response.data;
 };
 
 app.get("/", async (req, res) => {
-    let currentIndex = 0;
-    if (req.query.offset) {
-        currentIndex = parseInt(req.query.offset);
-    }
-    res.render("index", {
-        pokemon: await getPokemon(currentIndex),
-        nextIndex: currentIndex + 1,
-        previousIndex: currentIndex - 1,
-        showPreviousButton: currentIndex > 0,
-        showNextButton: currentIndex < 251
-    });
+    let requestedNumber = parseInt(req.query.number);
+    let selectedNumber = 1;
+    if (requestedNumber) selectedNumber = requestedNumber;
+    let returnObj = {
+        pokemon: await getPokemon(selectedNumber),
+        currentNumber: selectedNumber,
+        nextNumber: selectedNumber + 1,
+        previousNumber: selectedNumber - 1,
+        showPreviousButton: selectedNumber > 1,
+        showNextButton: selectedNumber < 10
+    };
+    console.log(returnObj);
+    res.render("index", returnObj);
 });
 
 app.listen(5000, () => console.log("App is listening on port 5000"));
