@@ -1,12 +1,7 @@
 extends ../partials/layout.pug
 
 block main 
-    h2 Pokemon
-    h4 #{pokemon.name}
-    img(src=pokemon.sprites.front_default)
-    if showPreviousButton
-        div
-            a(href=`/?number=${previousNumber}`) Previous
-    if showNextButton
-    div
-        a(href=`/?number=${nextNumber}`) Next
+    ul(class="menu-list")
+        each pokemon in results
+            li 
+                a(href=`${pokemon.url}`) #{pokemon.id} - #{pokemon.name}

@@ -1,0 +1,8 @@
+extends ../partials/layout.pug
+
+block main 
+
+    h4(class="title is-4") #{result.name}
+    div
+        img(src=`${result.sprite}`)
+    a(class="button" href="/") Back
